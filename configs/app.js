@@ -3,6 +3,9 @@ import cors from "cors";
 import { config } from "dotenv";
 import morgan from "morgan";
 import helmet from "helmet";
+import UserRoutes from '../src/User/User.routes.js'
+import fileUpload from "express-fileupload";
+import MessageRoutes from "../src/Message/Message.routes.js";
 
 //# Configs
 const app = express();
@@ -14,8 +17,11 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
+app.use(fileUpload())
 
 //# Routes
+app.use('/user', UserRoutes)
+app.use('/message', MessageRoutes)
 
 //# Initialize Server
 export const initServer = async () => {
